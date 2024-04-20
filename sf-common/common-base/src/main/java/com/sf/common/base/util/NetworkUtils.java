@@ -16,6 +16,9 @@ public class NetworkUtils {
 
     /**
      * 获取ip地址
+     *
+     * @param request
+     * @return
      */
     public static String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");

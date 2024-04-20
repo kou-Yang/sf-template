@@ -14,8 +14,8 @@ public class ResultUtils {
      * @param <T>
      * @return
      */
-    public static <T> BaseResponse<T> success() {
-        return new BaseResponse<>(CommonErrorEnum.SUCCESS);
+    public static <T> Result<T> success() {
+        return new Result<>(CommonErrorEnum.SUCCESS);
     }
 
     /**
@@ -24,8 +24,8 @@ public class ResultUtils {
      * @param <T>
      * @return
      */
-    public static <T> BaseResponse<T> success(T data) {
-        return new BaseResponse<>(200, data, "ok");
+    public static <T> Result<T> success(T data) {
+        return new Result<>(200, data, "ok");
     }
 
     /**
@@ -33,8 +33,8 @@ public class ResultUtils {
      * @param commonErrorEnum
      * @return
      */
-    public static BaseResponse error(CommonErrorEnum commonErrorEnum) {
-        return new BaseResponse<>(commonErrorEnum);
+    public static Result error(CommonErrorEnum commonErrorEnum) {
+        return new Result<>(commonErrorEnum);
     }
 
     /**
@@ -43,8 +43,8 @@ public class ResultUtils {
      * @param message
      * @return
      */
-    public static BaseResponse error(int code, String message) {
-        return new BaseResponse(code, null, message);
+    public static Result error(int code, String message) {
+        return new Result(code, null, message);
     }
 
     /**
@@ -52,7 +52,7 @@ public class ResultUtils {
      * @param commonErrorEnum
      * @return
      */
-    public static BaseResponse error(CommonErrorEnum commonErrorEnum, String message) {
-        return new BaseResponse(commonErrorEnum.getCode(), null, message);
+    public static Result error(CommonErrorEnum commonErrorEnum, String message) {
+        return new Result(commonErrorEnum.getCode(), null, message);
     }
 }
