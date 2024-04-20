@@ -1,7 +1,7 @@
-package com.sf.common.web.exception;
+package com.sf.common.web.handler;
 
 
-import com.sf.common.base.common.BaseResponse;
+import com.sf.common.base.common.Result;
 import com.sf.common.base.common.ResultUtils;
 import com.sf.common.base.exception.BusinessException;
 import com.sf.common.base.exception.CommonErrorEnum;
@@ -24,7 +24,7 @@ import javax.validation.ConstraintViolationException;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = ConstraintViolationException.class)
-    public BaseResponse<?> constraintViolationExceptionHandler(HttpServletRequest req, ConstraintViolationException ex) {
+    public Result<?> constraintViolationExceptionHandler(HttpServletRequest req, ConstraintViolationException ex) {
         log.debug("constraintViolationExceptionHandler", ex);
         StringBuilder errorMsg = new StringBuilder();
         ex.getConstraintViolations().forEach(x -> errorMsg.append(x.getPropertyPath()).append(":").append(x.getMessage()).append(";"));
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public BaseResponse<?> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
+    public Result<?> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
         log.error("methodArgumentNotValidException", ex);
         StringBuilder errorMsg = new StringBuilder();
         ex.getBindingResult().getFieldErrors().forEach(x -> errorMsg.append(x.getField()).append(":").append(x.getDefaultMessage()).append(";"));
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = BindException.class)
-    public BaseResponse<?> bindExceptionHandler(BindException ex) {
+    public Result<?> bindExceptionHandler(BindException ex) {
         log.error("bindExceptionHandler", ex);
         StringBuilder errorMsg = new StringBuilder();
         ex.getBindingResult().getFieldErrors().forEach(x -> errorMsg.append(x.getField()).append(":").append(x.getDefaultMessage()).append(";"));
@@ -51,13 +51,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public BaseResponse<?> businessExceptionHandler(BusinessException ex) {
+    public Result<?> businessExceptionHandler(BusinessException ex) {
         log.error("businessException: " + ex.getMessage(), ex);
         return ResultUtils.error(ex.getCode(), ex.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public BaseResponse<?> runtimeExceptionHandler(RuntimeException ex) {
+    public Result<?> runtimeExceptionHandler(RuntimeException ex) {
         log.error("runtimeException", ex);
         return ResultUtils.error(CommonErrorEnum.SYSTEM_ERROR, ex.getMessage());
     }
