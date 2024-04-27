@@ -6,6 +6,7 @@ import com.sf.common.base.common.ResultUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -28,12 +29,17 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return true;
+        // 如果当前请求是 swagger 相关请求则不统一返回结果
+        return !returnType.getDeclaringClass().isAssignableFrom(BasicErrorController.class);
     }
 
     @SneakyThrows
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+        // 如果当前请求是 swagger 相关请求则不统一返回结果
+        if (request.getURI().getPath().startsWith("/api/swagger") || request.getURI().getPath().startsWith("/api/v2/api-docs")) {
+            return body;
+        }
         if (body instanceof String) {
             return objectMapper.writeValueAsString(ResultUtils.success(body));
         }
