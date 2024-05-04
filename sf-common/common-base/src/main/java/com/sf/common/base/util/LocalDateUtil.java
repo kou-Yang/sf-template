@@ -17,8 +17,21 @@ public class LocalDateUtil {
      * @param time 时间
      * @return LocalDateTime
      */
-    public LocalDateTime getLocalDateTimeOfDate(Date time) {
+    public LocalDateTime toLocalDateTime(Date time) {
         return time.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    /**
+     * 秒级、毫秒级时间戳转 LocalDateTime
+     *
+     * @param epoch 时间戳
+     * @return LocalDateTime
+     */
+    public static LocalDateTime toLocalDateTime(long epoch) {
+        if (String.valueOf(epoch).length() == 10) {
+            return Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        }
+        return Instant.ofEpochMilli(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     /**
@@ -27,18 +40,21 @@ public class LocalDateUtil {
      * @param time 时间
      * @return LocalDate
      */
-    public LocalDate getLocalDateOfDate(Date time) {
+    public LocalDate toLocalDate(Date time) {
         return time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     /**
-     * 毫秒级时间戳转 LocalDateTime
+     * 毫秒级时间戳转 LocalDate
      *
-     * @param epochMilli 毫秒级时间戳
-     * @return LocalDateTime
+     * @param epoch 秒级或毫秒级时间戳
+     * @return LocalDate
      */
-    public static LocalDateTime getLocalDateTimeOfEpochMilli(long epochMilli) {
-        return Instant.ofEpochMilli(epochMilli).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    public static LocalDate toLocalDate(long epoch) {
+        if (String.valueOf(epoch).length() == 10) {
+            Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+        return Instant.ofEpochMilli(epoch).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     /**
@@ -47,18 +63,8 @@ public class LocalDateUtil {
      * @param time 时间
      * @return 毫秒级时间戳
      */
-    public static long getEpochMilliOfLocalDateTime(LocalDateTime time) {
+    public static long toEpochMilli(LocalDateTime time) {
         return time.toInstant(ZoneOffset.of("+8")).toEpochMilli();
-    }
-
-    /**
-     * 毫秒级时间戳转 LocalDate
-     *
-     * @param epochMilli 毫秒级时间戳
-     * @return LocalDate
-     */
-    public static LocalDate getLocalDateOfEpochMilli(long epochMilli) {
-        return Instant.ofEpochMilli(epochMilli).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     /**
@@ -67,18 +73,8 @@ public class LocalDateUtil {
      * @param time 时间
      * @return 毫秒级时间戳
      */
-    public static long getEpochMilliOfLocalDate(LocalDate time) {
-        return getEpochMilliOfLocalDateTime(LocalDateTime.of(time, LocalTime.MIN));
-    }
-
-    /**
-     * 秒级时间戳转 LocalDateTime
-     *
-     * @param epochSecond 秒级时间戳
-     * @return LocalDateTime
-     */
-    public static LocalDateTime getLocalDateTimeOfEpochSecond(long epochSecond) {
-        return Instant.ofEpochSecond(epochSecond).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    public static long toEpochMilli(LocalDate time) {
+        return toEpochMilli(LocalDateTime.of(time, LocalTime.MIN));
     }
 
     /**
@@ -87,18 +83,8 @@ public class LocalDateUtil {
      * @param time 时间
      * @return 秒级时间戳
      */
-    public static long getEpochSecondOfLocalDateTime(LocalDateTime time) {
+    public static long toEpochSecond(LocalDateTime time) {
         return time.atZone(ZoneId.systemDefault()).toEpochSecond();
-    }
-
-    /**
-     * 秒级时间戳转 LocalDate
-     *
-     * @param epochSecond 秒级时间戳
-     * @return LocalDate
-     */
-    public static LocalDate getLocalDateOfEpochSecond(long epochSecond) {
-        return Instant.ofEpochMilli(epochSecond).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     /**
@@ -107,8 +93,8 @@ public class LocalDateUtil {
      * @param time 时间
      * @return 秒级时间戳
      */
-    public static long getEpochSecondOfLocalDate(LocalDate time) {
-        return getEpochSecondOfLocalDateTime(LocalDateTime.of(time, LocalTime.MIN));
+    public static long toEpochSecond(LocalDate time) {
+        return toEpochSecond(LocalDateTime.of(time, LocalTime.MIN));
     }
 
     /**

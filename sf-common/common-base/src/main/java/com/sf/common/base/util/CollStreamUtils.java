@@ -258,6 +258,19 @@ public class CollStreamUtils {
     }
 
     /**
+     * 截取集合
+     *
+     * @param collection 集合
+     * @param start      起始位置（1开始）
+     * @param size       截取大小
+     * @param <T>        泛型
+     * @return 截取后的集合
+     */
+    public static <T> List<T> interceptCollection(Collection<T> collection, long start, long size) {
+        return nullDefaultEmpty(collection).stream().skip(start).limit(size).collect(Collectors.toList());
+    }
+
+    /**
      * 将集合中的某个字段用delimiter分隔，包含前缀后缀
      *
      * @param delimiter  分隔符

@@ -62,7 +62,7 @@ public class DateConverterConfig {
                 }
                 source = source.trim();
                 if (source.matches(DEFAULT_TIMESTAMP_FORMAT)) {
-                    return LocalDateUtil.getLocalDateTimeOfEpochMilli(Long.parseLong(source));
+                    return LocalDateUtil.toLocalDateTime(Long.parseLong(source));
                 }
                 return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT));
             }
