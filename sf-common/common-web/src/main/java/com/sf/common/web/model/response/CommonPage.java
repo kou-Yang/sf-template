@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,11 +21,15 @@ public class CommonPage<T> {
     private List<T> record;
     private Long total;
 
-    public static <T> CommonPage<T> restPage(List<T> list) {
-        return new CommonPage<T>(list, Long.valueOf(String.valueOf(list.size())));
+    public static <T> CommonPage<T> restPage(List<T> list, Long total) {
+        return new CommonPage<T>(list, total);
     }
 
     public static <T> CommonPage<T> restPage(IPage<T> page) {
         return new CommonPage<T>(page.getRecords(), page.getTotal());
+    }
+
+    public static <T> CommonPage<T> emptyPage() {
+        return new CommonPage<T>(Collections.emptyList(), 0L);
     }
 }

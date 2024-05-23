@@ -12,7 +12,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.sf.common.base.util.LocalDateUtil;
+import com.sf.common.base.util.LocalDateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,7 +62,7 @@ public class DateConverterConfig {
                 }
                 source = source.trim();
                 if (source.matches(DEFAULT_TIMESTAMP_FORMAT)) {
-                    return LocalDateUtil.toLocalDateTime(Long.parseLong(source));
+                    return LocalDateUtils.toLocalDateTime(Long.parseLong(source));
                 }
                 return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT));
             }

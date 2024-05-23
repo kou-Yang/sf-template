@@ -39,6 +39,19 @@ public class CollStreamUtils {
     }
 
     /**
+     * 转换成一个新的List并去重
+     *
+     * @param collection 集合
+     * @param function   表达式
+     * @param <T>        泛型
+     * @param <R>        泛型
+     * @return 新的集合
+     */
+    public static <T, R> List<R> toDistinctList(Collection<T> collection, Function<? super T, ? extends R> function) {
+        return nullDefaultEmpty(collection).stream().map(function).distinct().collect(Collectors.toList());
+    }
+
+    /**
      * 转换成一个新的Map
      *
      * @param collection  集合
@@ -47,7 +60,7 @@ public class CollStreamUtils {
      * @param <T>         泛型
      * @param <K>         泛型
      * @param <U>         泛型
-     * @return
+     * @return Map
      */
     public static <T, K, U> Map<K, U> toMap(Collection<T> collection, Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper) {
         return nullDefaultEmpty(collection).stream().collect(Collectors.toMap(keyMapper, valueMapper));
@@ -63,7 +76,7 @@ public class CollStreamUtils {
      * @param <T>           泛型
      * @param <K>           泛型
      * @param <U>           泛型
-     * @return
+     * @return Map
      */
     public static <T, K, U> Map<K, U> toMap(Collection<T> collection, Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U> mergeFunction) {
         return nullDefaultEmpty(collection).stream().collect(Collectors.toMap(keyMapper, valueMapper, mergeFunction));

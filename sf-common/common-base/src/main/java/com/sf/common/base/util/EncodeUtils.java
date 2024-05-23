@@ -10,7 +10,7 @@ import java.util.Base64;
  * @description 编解码工具
  * @date 2024-04-15 16:25
  */
-public class EncodeUtil {
+public class EncodeUtils {
 
     private static final String DEFAULT_URL_ENCODING = "UTF-8";
 

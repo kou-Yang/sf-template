@@ -28,7 +28,7 @@ import java.util.List;
 public class SwaggerConfig {
 
     /**
-     * 增加如下配置可解决Spring Boot 6.x 与Swagger 3.0.0 不兼容问题
+     * 增加如下配置可解决Spring Boot 6.x 与 Swagger 3.0.0 不兼容问题
      **/
     @Bean
     public WebMvcEndpointHandlerMapping webEndpointServletHandlerMapping(WebEndpointsSupplier webEndpointsSupplier, ServletEndpointsSupplier servletEndpointsSupplier, ControllerEndpointsSupplier controllerEndpointsSupplier, EndpointMediaTypes endpointMediaTypes, CorsEndpointProperties corsProperties, WebEndpointProperties webEndpointProperties, Environment environment) {

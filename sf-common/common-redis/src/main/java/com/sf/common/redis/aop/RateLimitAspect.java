@@ -1,7 +1,6 @@
 package com.sf.common.redis.aop;
 
 
-import com.sf.common.base.common.UserHolder;
 import com.sf.common.base.exception.BusinessException;
 import com.sf.common.base.exception.CommonErrorEnum;
 import com.sf.common.base.util.NetworkUtils;
@@ -88,7 +87,7 @@ public class RateLimitAspect {
                 key = prefix + SpElUtils.parseSpEl(method, joinPoint.getArgs(), rateLimiter.spEl());
                 break;
             case UID:
-                key = prefix + UserHolder.getUserId();
+                key = prefix + SpringContextUtils.getHttpServletRequest().getAttribute("userId");
             default:
                 break;
         }

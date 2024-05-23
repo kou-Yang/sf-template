@@ -1,14 +1,12 @@
 package com.sf.common.web.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -20,11 +18,7 @@ import java.util.function.Predicate;
  *
  * @author kouyang
  */
-@Configuration
-@EnableSwagger2
-public class Knife4jConfig {
-
-    private final String SPLIT = ";";
+public class BaseKnife4jConfig {
 
     @Bean
     public Docket defaultApi2() {
@@ -43,7 +37,7 @@ public class Knife4jConfig {
                 .build();
     }
 
-    public Predicate<RequestHandler> basePackage(final String basePackage) {
+    public Predicate<RequestHandler> basePackage(final String... basePackage) {
         return input -> declaringClass(input).map(handlerPackage(basePackage)).orElse(true);
     }
 
@@ -51,10 +45,10 @@ public class Knife4jConfig {
         return Optional.ofNullable(input.declaringClass());
     }
 
-    private Function<Class<?>, Boolean> handlerPackage(final String basePackage)     {
+    private Function<Class<?>, Boolean> handlerPackage(final String... basePackage)     {
         return input -> {
             // 循环判断匹配
-            for (String strPackage : basePackage.split(SPLIT)) {
+            for (String strPackage : basePackage) {
                 assert input != null;
                 boolean isMatch = input.getPackage().getName().startsWith(strPackage);
                 if (isMatch) {

@@ -9,7 +9,7 @@ import java.util.Date;
  * @description LocalDate具类
  * @date 2024-04-15 16:06
  */
-public class LocalDateUtil {
+public class LocalDateUtils {
 
     /**
      * Date 转 LocalDateTime

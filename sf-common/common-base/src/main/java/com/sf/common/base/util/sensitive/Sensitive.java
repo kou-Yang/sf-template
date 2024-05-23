@@ -1,9 +1,7 @@
-package com.sf.common.base.util.desensitization.annotation;
+package com.sf.common.base.util.sensitive;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.sf.common.base.util.desensitization.annotation.impl.NameConverterImpl;
-import com.sf.common.base.util.desensitization.base.CustomConverter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,14 +10,14 @@ import java.lang.annotation.Target;
 
 /**
  * @author ky
- * @description 名称脱敏注解
- * @date 2024-04-17 16:40
+ * @description 脱敏注解
+ * @date 2024-05-23 14:28
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @JacksonAnnotationsInside
-@JsonSerialize
-@CustomConverter(NameConverterImpl.class)
-public @interface NameConverter {
+@JsonSerialize(using = SensitiveJsonSerializer.class)
+public @interface Sensitive {
 
+    SensitiveStrategy strategy();
 }
