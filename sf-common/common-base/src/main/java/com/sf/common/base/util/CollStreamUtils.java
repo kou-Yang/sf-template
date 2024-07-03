@@ -168,7 +168,7 @@ public class CollStreamUtils {
      * @return 和
      */
     public static <T> Integer sumInt(Collection<T> collection, ToIntFunction<? super T> mapper) {
-        return nullDefaultEmpty(collection).stream().mapToInt(mapper).sum();
+        return nullDefaultEmpty(collection).stream().mapToInt(mapper).filter(Objects::nonNull).sum();
     }
 
     /**
@@ -180,7 +180,7 @@ public class CollStreamUtils {
      * @return 和
      */
     public static <T> Long sumLong(Collection<T> collection, ToLongFunction<? super T> mapper) {
-        return nullDefaultEmpty(collection).stream().mapToLong(mapper).sum();
+        return nullDefaultEmpty(collection).stream().mapToLong(mapper).filter(Objects::nonNull).sum();
     }
 
     /**
@@ -192,7 +192,7 @@ public class CollStreamUtils {
      * @return 和
      */
     public static <T> Double sumDouble(Collection<T> collection, ToDoubleFunction<? super T> mapper) {
-        return nullDefaultEmpty(collection).stream().mapToDouble(mapper).sum();
+        return nullDefaultEmpty(collection).stream().mapToDouble(mapper).filter(Objects::nonNull).sum();
     }
 
     /**
@@ -204,7 +204,7 @@ public class CollStreamUtils {
      * @return 和
      */
     public static <T> BigDecimal sumBigDecimal(Collection<T> collection, Function<? super T, BigDecimal> mapper) {
-        return nullDefaultEmpty(collection).stream().map(mapper).reduce(BigDecimal.ZERO, BigDecimal::add);
+        return nullDefaultEmpty(collection).stream().map(mapper).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     /**

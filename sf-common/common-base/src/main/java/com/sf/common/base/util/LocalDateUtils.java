@@ -109,6 +109,16 @@ public class LocalDateUtils {
     }
 
     /**
+     * 获取 time 所在周的开始时间
+     * @param time
+     * @return
+     */
+    public static LocalDate getFirstDayOfWeek(LocalDate time) {
+        int dayOfWeek = time.getDayOfWeek().getValue();
+        return time.minusDays(dayOfWeek - 1) ;
+    }
+
+    /**
      * 获取 time 所在周的结束时间
      *
      * @param time 时间
@@ -117,6 +127,16 @@ public class LocalDateUtils {
     public static LocalDateTime getLastDayOfWeek(LocalDateTime time) {
         int dayOfWeek = time.getDayOfWeek().getValue();
         return time.plusDays(7 - dayOfWeek).with(LocalTime.MAX);
+    }
+
+    /**
+     * 获取 time 所在周的结束时间
+     * @param time
+     * @return
+     */
+    public static LocalDate getLastDayOfWeek(LocalDate time) {
+        int dayOfWeek = time.getDayOfWeek().getValue();
+        return time.plusDays(7 - dayOfWeek);
     }
 
     /**
@@ -130,13 +150,31 @@ public class LocalDateUtils {
     }
 
     /**
+     * 获取 time 所在月份的开始时间
+     * @param time
+     * @return
+     */
+    public static LocalDate getFirstDayOfMonth(LocalDate time) {
+        return time.with(TemporalAdjusters.firstDayOfMonth());
+    }
+
+    /**
      * 获取 time 所在月份的结束时间
      *
      * @param time 时间
      * @return time 所在月份的结束时间
      */
     public static LocalDateTime getLastDayOfMonth(LocalDateTime time) {
-        return time.with(TemporalAdjusters.lastDayOfMonth()).with(LocalTime.MIN);
+        return time.with(TemporalAdjusters.lastDayOfMonth()).with(LocalTime.MAX);
+    }
+
+    /**
+     * 获取 time 所在月份的结束时间
+     * @param time
+     * @return
+     */
+    public static LocalDate getLastDayOfMonth(LocalDate time) {
+        return time.with(TemporalAdjusters.lastDayOfMonth());
     }
 
     /**
@@ -150,12 +188,30 @@ public class LocalDateUtils {
     }
 
     /**
+     * 获取 time 所在年份的开始时间
+     * @param time
+     * @return
+     */
+    public static LocalDate getFirstDayOfYear(LocalDate time) {
+        return time.with(TemporalAdjusters.firstDayOfYear());
+    }
+
+    /**
      * 获取 time 所在年份的结束时间
      *
      * @param time 时间
      * @return time 所在年份的结束时间
      */
     public static LocalDateTime getLastDayOfYear(LocalDateTime time) {
-        return time.with(TemporalAdjusters.lastDayOfYear()).with(LocalTime.MIN);
+        return time.with(TemporalAdjusters.lastDayOfYear()).with(LocalTime.MAX);
+    }
+
+    /**
+     * 获取 time 所在年份的结束时间
+     * @param time
+     * @return
+     */
+    public static LocalDate getLastDayOfYear(LocalDate time) {
+        return time.with(TemporalAdjusters.lastDayOfYear());
     }
 }

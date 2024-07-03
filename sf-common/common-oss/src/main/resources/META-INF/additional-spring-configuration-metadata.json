@@ -1,0 +1,79 @@
+{
+  "groups": [
+    {
+      "name": "object.storage.minio",
+      "type": "com.sf.common.oss.minio.autoconfigure.MinIOProperties",
+      "sourceType": "com.sf.common.oss.minio.autoconfigure.MinIOProperties"
+    },
+    {
+      "name": "object.storage.oss",
+      "type": "com.sf.common.oss.oss.autoconfigure.OSSProperties",
+      "sourceType": "com.sf.common.oss.oss.autoconfigure.OSSProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "object.storage.minio.access-key",
+      "type": "java.lang.String",
+      "description": "accessKey",
+      "sourceType": "com.sf.common.oss.minio.autoconfigure.MinIOProperties"
+    },
+    {
+      "name": "object.storage.minio.bucket-name",
+      "type": "java.lang.String",
+      "description": "存储空间",
+      "sourceType": "com.sf.common.oss.minio.autoconfigure.MinIOProperties"
+    },
+    {
+      "name": "object.storage.minio.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启",
+      "sourceType": "com.sf.common.oss.minio.autoconfigure.MinIOProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "object.storage.minio.endpoint",
+      "type": "java.lang.String",
+      "description": "访问域名",
+      "sourceType": "com.sf.common.oss.minio.autoconfigure.MinIOProperties"
+    },
+    {
+      "name": "object.storage.minio.secret-key",
+      "type": "java.lang.String",
+      "description": "secretKey",
+      "sourceType": "com.sf.common.oss.minio.autoconfigure.MinIOProperties"
+    },
+    {
+      "name": "object.storage.oss.access-key-id",
+      "type": "java.lang.String",
+      "description": "accessKeyId",
+      "sourceType": "com.sf.common.oss.oss.autoconfigure.OSSProperties"
+    },
+    {
+      "name": "object.storage.oss.access-key-secret",
+      "type": "java.lang.String",
+      "description": "accessKeySecret",
+      "sourceType": "com.sf.common.oss.oss.autoconfigure.OSSProperties"
+    },
+    {
+      "name": "object.storage.oss.bucket-name",
+      "type": "java.lang.String",
+      "description": "存储空间",
+      "sourceType": "com.sf.common.oss.oss.autoconfigure.OSSProperties"
+    },
+    {
+      "name": "object.storage.oss.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启",
+      "sourceType": "com.sf.common.oss.oss.autoconfigure.OSSProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "object.storage.oss.endpoint",
+      "type": "java.lang.String",
+      "description": "访问域名",
+      "sourceType": "com.sf.common.oss.oss.autoconfigure.OSSProperties"
+    }
+  ],
+  "hints": []
+}

@@ -2,6 +2,7 @@ package com.sf.common.web.handler;
 
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.sf.common.base.common.UserHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -21,12 +22,15 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
+        this.strictInsertFill(metaObject, "createBy", String.class, UserHolder.getUserId());
+        this.strictInsertFill(metaObject, "updateBy", String.class, UserHolder.getUserId());
         this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
         this.strictInsertFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
+        this.strictInsertFill(metaObject, "updateBy", String.class, UserHolder.getUserId());
         this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
     }
 

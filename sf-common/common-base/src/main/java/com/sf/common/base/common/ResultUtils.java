@@ -31,9 +31,10 @@ public class ResultUtils {
     /**
      * 失败
      * @param commonErrorEnum
+     * @param <T>
      * @return
      */
-    public static Result error(CommonErrorEnum commonErrorEnum) {
+    public static <T> Result<T> error(CommonErrorEnum commonErrorEnum) {
         return new Result<>(commonErrorEnum);
     }
 
@@ -41,18 +42,21 @@ public class ResultUtils {
      * 失败
      * @param code
      * @param message
+     * @param <T>
      * @return
      */
-    public static Result error(int code, String message) {
-        return new Result(code, null, message);
+    public static <T> Result<T> error(int code, String message) {
+        return new Result<>(code, null, message);
     }
 
     /**
      * 失败
      * @param commonErrorEnum
+     * @param message
+     * @param <T>
      * @return
      */
-    public static Result error(CommonErrorEnum commonErrorEnum, String message) {
-        return new Result(commonErrorEnum.getCode(), null, message);
+    public static <T> Result<T> error(CommonErrorEnum commonErrorEnum, String message) {
+        return new Result<>(commonErrorEnum.getCode(), null, message);
     }
 }

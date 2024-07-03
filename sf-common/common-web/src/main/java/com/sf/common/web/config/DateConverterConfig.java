@@ -74,6 +74,9 @@ public class DateConverterConfig {
         return new Converter<String, LocalDate>() {
             @Override
             public LocalDate convert(String source) {
+                if (StringUtils.isBlank(source)) {
+                    return null;
+                }
                 return LocalDate.parse(source, DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
             }
         };
@@ -84,6 +87,9 @@ public class DateConverterConfig {
         return new Converter<String, LocalTime>() {
             @Override
             public LocalTime convert(String source) {
+                if (StringUtils.isBlank(source)) {
+                    return null;
+                }
                 return LocalTime.parse(source, DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT));
             }
         };

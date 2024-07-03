@@ -1,5 +1,11 @@
 package com.sf.common.base.common;
 
+import com.sf.common.base.exception.BusinessException;
+import com.sf.common.base.exception.CommonErrorEnum;
+import com.sf.common.base.model.entity.BaseUser;
+
+import java.util.Optional;
+
 /**
  * @author ky
  * @description
@@ -7,7 +13,21 @@ package com.sf.common.base.common;
  */
 public class UserHolder {
 
-    public static Long getUserId() {
-        return 1L;
+    private static final ThreadLocal<BaseUser> threadLocal = new ThreadLocal<>();
+
+    public static void set(BaseUser user) {
+        threadLocal.set(user);
+    }
+
+    public static BaseUser get() {
+        return threadLocal.get();
+    }
+
+    public static void remove() {
+        threadLocal.remove();
+    }
+
+    public static String getUserId() {
+        return Optional.ofNullable(get()).map(BaseUser::getId).orElseThrow(() -> new BusinessException(CommonErrorEnum.NOT_LOGIN_ERROR));
     }
 }

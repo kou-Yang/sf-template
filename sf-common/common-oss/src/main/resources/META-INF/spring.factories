@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.sf.common.oss.minio.autoconfigure.MinIOConfiguration,\
+  com.sf.common.oss.oss.autoconfigure.OSSConfiguration

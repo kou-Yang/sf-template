@@ -30,4 +30,16 @@ public class SpElUtils {
         Expression expression = parser.parseExpression(spEl);
         return expression.getValue(context, String.class);
     }
+
+    public static <T> T parseSpEl(Method method, Object[] args, String spEl, Object rootObject, Class<T> desiresResultType) {
+        // 解析参数名
+        String[] params = parameterNameDiscoverer.getParameterNames(method);
+        // el 解析需要的上下文对象
+        EvaluationContext context = new StandardEvaluationContext(rootObject);
+        for (int i = 0; i < params.length; i++) {
+            context.setVariable(params[i], args[i]);
+        }
+        Expression expression = parser.parseExpression(spEl);
+        return expression.getValue(context, desiresResultType);
+    }
 }
